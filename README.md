@@ -1,48 +1,65 @@
 NPC Validator Node
 
-The NPC Validator Node secures the Bluesignal Pollution Gateway network. It validates incoming water-quality data from field devices, maintains block integrity, and issues rewards to node operators. This node is a core component of Bluesignal’s decentralized environmental monitoring system.
+Bluesignal’s decentralized validation engine for the Pollution Gateway network.
+Ensures data integrity, block correctness, and reward distribution across the NPC ecosystem.
 
-Features
-
-Data Validation
-Verifies signed sensor packets from Pollution Gateways.
-
-Consensus Participation
-Maintains block history, prevents tampering, and ensures data integrity.
-
-Reward Distribution
-Calculates and issues NPC rewards to active validators.
-
-Device & Marketplace APIs
-Exposes JSON-RPC and REST endpoints for registry, marketplace, and monitoring services.
-
-Lightweight Deployment
-Optimized for VPS or local operation.
-
-Architecture Overview
-Pollution Gateway ──► Node Validator ──► Blockchain
-                          │
-                          ├──► Marketplace API
-                          ├──► Device Registry
-                          └──► Reward Engine
+<div align="center">
 
 
-The validator sits between field devices and the blockchain, ensuring only valid data is written and only legitimate operators are rewarded.
 
-Requirements
+
+
+
+
+
+</div>
+🌊 Overview
+
+The NPC Validator Node secures the Bluesignal Pollution Gateway network by:
+
+Verifying signed water-quality sensor packets
+
+Maintaining consensus and block correctness
+
+Issuing NPC rewards to validators
+
+Exposing lightweight APIs for Marketplace + Registry services
+
+This node sits at the core of Bluesignal’s distributed environmental data pipeline.
+
+🧱 Architecture
+   ┌────────────────┐       ┌────────────────┐      ┌──────────────────┐
+   │ Pollution       │       │ NPC Validator  │      │   Blockchain     │
+   │ Gateway Device  ├──────►│     Node       ├─────►│   (NPC Layer)    │
+   └────────────────┘       └─────┬──────────┘      └────────┬─────────┘
+                                   │                          │
+                                   │                          │
+                                   ▼                          ▼
+                         ┌──────────────────┐       ┌────────────────────┐
+                         │ Marketplace API  │       │   Registry Service │
+                         └──────────────────┘       └────────────────────┘
+
+✨ Features
+Feature	Description
+Data Validation	Confirms authenticity + structure of incoming sensor packets
+Consensus Logic	Maintains a secure, append-only block record
+Reward Engine	Distributes NPC rewards to participating validators
+API Layer	JSON-RPC & REST endpoints for system integrations
+Lightweight Deployment	Easily runs on a VPS or local machine
+🔧 Requirements
 
 Node.js 18+
 
 npm or pnpm
 
-Linux/macOS recommended (Windows works via WSL2)
+Linux/macOS recommended (WSL2 works on Windows)
 
-Installation
+📦 Installation
 git clone https://github.com/bluesignal/Node.git
 cd Node
 npm install
 
-Configuration
+⚙️ Configuration
 
 Create a .env file in the repo root:
 
@@ -53,83 +70,77 @@ REGISTRY_URL=<registry_service>
 REWARD_INTERVAL=600
 
 
-Config parameters:
+Parameter Guide
 
-VALIDATOR_KEY — private key used to sign validator messages
-
-RPC_ENDPOINT — blockchain RPC endpoint
-
-MARKETPLACE_URL — API endpoint for device/credit interactions
-
-REGISTRY_URL — device identity & provisioning service
-
-REWARD_INTERVAL — reward distribution frequency (seconds)
-
-Running the Validator
+Key	Purpose
+VALIDATOR_KEY	Private key for validator signing
+RPC_ENDPOINT	Blockchain RPC provider
+MARKETPLACE_URL	API endpoint for credit/device interactions
+REGISTRY_URL	Device provisioning + identity service
+REWARD_INTERVAL	Time (seconds) between reward calculations
+🚀 Running the Validator
 Development
 npm run dev
 
 Production
 npm run start
 
-API Endpoints
+📡 API Endpoints
 Health Check
-
 GET /health
-Returns online/offline status.
 
-Submit Data Packet
-
+Validate Data Packet
 POST /validate
-Validates a water-quality sensor packet from a Pollution Gateway.
 
 Validator Status
-
 GET /status
-Reports staking status, uptime, and reward metrics.
 
-Metrics
-
+Metrics (Prometheus)
 GET /metrics
-Prometheus-compatible metrics for monitoring.
 
-Reward Logic (High-Level)
+💰 Reward Logic (Simplified)
 
-Rewards scale with uptime and successful data validations
+Uptime = higher reward weight
 
-Replayed or malformed packets are rejected
+Valid packets increase score
 
-Operators earn NPC only when the node remains online and synced
+Malformed / replay packets reduce score
 
-Rewards settle on-chain at the end of each interval
+Rewards settle on-chain every interval
 
-Development Notes
+All reward events are cryptographically signed
 
-Keep commits small and descriptive
+🛠️ Development Notes
 
-No secrets in source control — use .env
+Keep PRs small and reviewable
 
-Follow the existing logging and error-handling patterns
+No secrets in commits
 
-TypeScript migration under consideration
+Follow existing logging patterns
 
-Roadmap
+TypeScript migration under evaluation
 
- Dedicated Bluesignal RPC provider
-
- Slashing for malicious validators
+🗺️ Roadmap
 
  Multi-validator consensus
 
- Operator dashboard + analytics
+ Slashing for malicious validators
 
- Automatic updater for long-running nodes
+ On-chain proofs of validation
 
-License
+ Validator operator dashboard
 
-MIT License.
+ Auto-update support
 
-Support
+📄 License
 
-For issues, operational guidance, or documentation requests:
+This project is licensed under the MIT License.
+
+📬 Support
+
+Questions, integration requests, or documentation needs:
 hi@bluesignal.xyz
+
+💙 Bluesignal
+
+Visit: https://bluesignal.xyz
