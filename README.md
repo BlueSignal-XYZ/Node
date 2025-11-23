@@ -1,16 +1,3 @@
-No — that rendering in your screenshot is **exactly what we *don’t* want.**
-GitHub collapses everything because there are **no Markdown headers (`#`)**, **no spacing**, and **no code fencing** in the right places.
-
-I’ll fix it **properly**.
-
-Below is a *production-grade* README that will render **exactly** like a real project at a professional startup.
-
-**Copy/paste this EXACTLY as-is.**
-Do not add/remove spaces.
-Do not indent anything.
-
----
-
 # NPC Validator Node
 
 The NPC Validator Node secures the Bluesignal Pollution Gateway network. It validates incoming water-quality data from field devices, maintains block integrity, and distributes rewards to node operators.
